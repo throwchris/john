@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+
+    <script>
+      function fetch() {
+        // GET SEARCH TERM
+        var data = new FormData();
+        data.append('search', document.getElementById("search").value);
+        data.append('ajax', 1);
+        // AJAX SEARCH REQUEST
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "search.php", true);
+        xhr.onload = function () {
+          if (this.status==200) {
+            var results = JSON.parse(this.response),
+                wrapper = document.getElementById("results");
+            wrapper.innerHTML = "";
+            if (results.length > 0) {
+              for(var res of results) {
+                var popup = document.createElement("div");
+                popup.innerHTML = res['name'] + " - " + res['definition'];
+                popup.classList.add("popup");
+                popup.onclick = function(){this.remove();};
+                document.body.appendChild(popup);
+              }
+            } else {
+              popup.innerHTML = "No results found";
+            }
+          } else {
+            alert("ERROR LOADING FILE!");
+          }
+        };
+        xhr.send(data);
+        return false;
+      }
+    </script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee, {font-size:200px}
+</style>
+  </head>
+  <body>
+  <div class="w3-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand neon" href="#">Jesus Christ Forever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PerfectChurch.com</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.html">Chapters 1 & 2</a> <!-- index.html -->
+            <a class="dropdown-item" href="index2.html">Chapters 3 & 4</a> <!-- index2.html -->
+            <a class="dropdown-item" href="index3.html">Chapters 5 & 6</a> <!-- index3.html -->
+            <a class="dropdown-item" href="index4.html">Chapters 7 & 8</a> <!-- index4.html -->
+            <a class="dropdown-item" href="index5.html">Chapters 9 & 10</a> <!-- index5.html -->
+            <a class="dropdown-item" href="index6.html">Chapters 11 & 12</a> <!-- index6.html -->
+            <a class="dropdown-item" href="index7.html">Chapters 13 & 14</a> <!-- index7.html -->
+            <a class="dropdown-item" href="index8.html">Chapters 15 & 16</a> <!-- index8.html -->
+            <a class="dropdown-item" href="index9.html">Chapters 17 & 18</a> <!-- index9.html -->
+            <a class="dropdown-item" href="index10.html">Chapters 19 & 20</a> <!-- index10.html -->
+            <a class="dropdown-item" href="index11.html">Chapter 21</a>       <!-- index11.html -->
+        </li>
+        </ul>
+      <form onsubmit="return fetch();">
+
+        <input type="text" id="search" required/>
+        <input type="submit" class="button" value="Search"/>
+      </form>
+      <div id="results"></div>
+    </div>
+    </nav>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+
+          <h1 style="font-size: 60px" class="animate__animated animate__bounceInDown neon">The Gospel According To John.</h1>
+          <p style="font-size: 30px" class="animate__animated animate__bounceInUp neon">"This is the disciple which testifieth of these things, and wrote these things: and we know that his testimony is true."</p>
+
+    <a href="index6.html"><button type="submit" class="button" style="margin:20px">back</button></a>
+    <a href="index8.html"><button type="submit" class="button" style="margin:20px">Next</button></a>
+    </header>
+
+    <div id="content">
+        <div id="left">
+
+          <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+          <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 13</FONT></P>
+          <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+          </P>
+        <!-- Paste 1st chapter under here -->
+        <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+  	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+  	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>N</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>ow
+  	before the feast of the passover</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+  	when Jesus knew that his hour was come that he should depart out of
+  	this world unto the Father, having loved his own which were in the
+  	world, he loved them unto the end. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+  	supper being ended, the devil having now put into the heart of Judas
+  	Iscariot, Simon's son, to betray him; </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+  	knowing that the Father had given all things into his hands, and
+  	that he was come from God, and went to God; </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+  	riseth from supper, and laid aside his garments; and took a towel,
+  	and girded himself. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">After
+  	that he poureth water into a basin, and began to wash the disciples'
+  	feet, and to wipe them with the towel wherewith he was girded. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+  	cometh he to Simon Peter: and Peter saith unto him, Lord, dost thou
+  	wash my feet? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+  	answered and said unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">What
+  	I do thou knowest not now; but thou shalt know hereafter. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Peter
+  	saith unto him, Thou shalt never wash my feet. Jesus answered him,
+  	</FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+  	I wash thee not, thou hast no part with me. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Simon
+  	Peter saith unto him, Lord, not my feet only, but also my hands and
+  	my head. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+  	saith to him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+  	that is washed needeth not save to wash his feet, but is clean every
+  	whit: and ye are clean, but not all. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">For
+  	he knew who should betray him; therefore said he, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Ye
+  	are not all clean. </FONT></FONT>
+  	</P>
+  	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+  	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>12</SUP>So after he had
+  	washed their feet, and had taken his garments, and was set down
+  	again, he said unto them, <FONT COLOR="#ff0000">Know ye what I have
+  	done to you? </FONT><FONT COLOR="#ff0000"><SUP>13</SUP></FONT><FONT COLOR="#ff0000">Ye
+  	call me Master and Lord: and ye say well; for so I am. </FONT><FONT COLOR="#ff0000"><SUP>14</SUP></FONT><FONT COLOR="#ff0000">If
+  	I then, your Lord and Master, have washed your feet; ye also ought
+  	to wash one another's feet. </FONT><FONT COLOR="#ff0000"><SUP>15</SUP></FONT><FONT COLOR="#ff0000">For
+  	I have given you an example, that ye should do as I have done to
+  	you. </FONT><FONT COLOR="#ff0000"><SUP>16</SUP></FONT><FONT COLOR="#ff0000">Verily,
+  	verily, I say unto you, The servant is not greater than his lord;
+  	neither he that is sent greater than he that sent him. </FONT><FONT COLOR="#ff0000"><SUP>17</SUP></FONT><FONT COLOR="#ff0000">If
+  	ye know these things, happy are ye if ye do them. </FONT></FONT>
+  	</P>
+  	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+  	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>18</SUP><FONT COLOR="#ff0000">I
+  	speak not of you all: I know whom I have chosen: but that the
+  	scripture may be fulfilled, He that eateth bread with me hath lifted
+  	up his heel against me. </FONT><FONT COLOR="#ff0000"><SUP>19</SUP></FONT><FONT COLOR="#ff0000">Now
+  	I tell you before it come, that, when it is come to pass, ye may
+  	believe that I am he. </FONT><FONT COLOR="#ff0000"><SUP>20</SUP></FONT><FONT COLOR="#ff0000">Verily,
+  	verily, I say unto you, He that receiveth whomsoever I send
+  	receiveth me; and he that receiveth me receiveth him that sent me.
+  	</FONT><SUP>21</SUP>When Jesus had thus said, he was troubled in
+  	spirit, and testified, and said, <FONT COLOR="#ff0000">Verily,
+  	verily, I say unto you, that one of you shall betray me. </FONT><SUP>22</SUP>Then
+  	the disciples looked one on another, doubting of whom he spake.
+  	<SUP>23</SUP>Now there was leaning on Jesus' bosom one of his
+  	disciples, whom Jesus loved. <SUP>24</SUP>Simon Peter therefore
+  	beckoned to him, that he should ask who it should be of whom he
+  	spake. <SUP>25</SUP>He then lying on Jesus' breast saith unto him,
+  	Lord, who is it? <SUP>26</SUP>Jesus answered, <FONT COLOR="#ff0000">He
+  	it is, to whom I shall give a sop, when I have dipped it.</FONT> And
+  	when he had dipped the sop, he gave it to Judas Iscariot, the son of
+  	Simon. <SUP>27</SUP>And after the sop Satan entered into him. Then
+  	said Jesus unto him, <FONT COLOR="#ff0000">That thou doest, do
+  	quickly. </FONT><SUP>28</SUP>Now no man at the table knew for what
+  	intent he spake this unto him. <SUP>29</SUP>For some of them
+  	thought, because Judas had the bag, that Jesus had said unto him,
+  	Buy those things that we have need of against the feast; or, that he
+  	should give something to the poor. <SUP>30</SUP>He then having
+  	received the sop went immediately out: and it was night. </FONT>
+  	</P>
+  	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+  	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">31</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore,
+  	when he was gone out, Jesus said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Now
+  	is the Son of man glorified, and God is glorified in him. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">32</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+  	God be glorified in him, God shall also glorify him in himself, and
+  	shall straightway glorify him. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">33</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Little
+  	children, yet a little while I am with you. Ye shall seek me: and as
+  	I said unto the Jews, Whither I go, ye cannot come; so now I say to
+  	you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">34</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">A
+  	new commandment I give unto you, That ye love one another; as I have
+  	loved you, that ye also love one another. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">35</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">By
+  	this shall all men know that ye are my disciples, if ye have love
+  	one to another. </FONT></FONT>
+  	</P>
+  	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+  	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">36</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Simon
+  	Peter said unto him, Lord, whither goest thou? Jesus answered him,
+  	</FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Whither
+  	I go, thou canst not follow me now; but thou shalt follow me
+  	afterwards. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">37</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Peter
+  	said unto him, Lord, why cannot I follow thee now? I will lay down
+  	my life for thy sake. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">38</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+  	answered him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Wilt
+  	thou lay down thy life for my sake? Verily, verily, I say unto thee,
+  	The cock shall not crow, till thou hast denied me thrice. </FONT></FONT>
+  	</P>
+  </div>
+  <div id="right">
+
+    <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+    <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 14</FONT></P>
+    <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+    </P>
+    <!-- Paste 2nd chapter under here -->
+    <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>L</B></I></FONT></FONT><FONT COLOR="#ff0000"><FONT SIZE=5 STYLE="font-size: 20pt"><B>et
+	not your heart be troubled:</B></FONT></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">
+	ye believe in God, believe also in me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">In
+	my Father's house are many mansions: if it were not so, I would have
+	told you. I go to prepare a place for you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+	if I go and prepare a place for you, I will come again, and receive
+	you unto myself; that where I am, there ye may be also. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+	whither I go ye know, and the way ye know.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Thomas
+	saith unto him, Lord, we know not whither thou goest; and how can we
+	know the way? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+	saith unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+	am the way, the truth, and the life: no man cometh unto the Father,
+	but by me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+	ye had known me, ye should have known my Father also: and from
+	henceforth ye know him, and have seen him.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Philip
+	saith unto him, Lord, shew us the Father, and it sufficeth us.
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+	saith unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Have
+	I been so long time with you, and yet hast thou not known me,
+	Philip? he that hath seen me hath seen the Father; and how sayest
+	thou then, Shew us the Father? </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Believest
+	thou not that I am in the Father, and the Father in me? the words
+	that I speak unto you I speak not of myself: but the Father that
+	dwelleth in me, he doeth the works. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Believe
+	me that I am in the Father, and the Father in me: or else believe me
+	for the very works' sake. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Verily,
+	verily, I say unto you, He that believeth on me, the works that I do
+	shall he do also; and greater works than these shall he do; because
+	I go unto my Father. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+	whatsoever ye shall ask in my name, that will I do, that the Father
+	may be glorified in the Son. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+	ye shall ask any thing in my name, I will do it. </FONT></FONT>
+	</P>
+	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+	ye love me, keep my commandments. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+	I will pray the Father, and he shall give you another Comforter,
+	that he may abide with you for ever; </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">even
+	the Spirit of truth; whom the world cannot receive, because it seeth
+	him not, neither knoweth him: but ye know him; for he dwelleth with
+	you, and shall be in you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+	will not leave you comfortless: I will come to you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">19</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Yet
+	a little while, and the world seeth me no more; but ye see me:
+	because I live, ye shall live also. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">20</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">At
+	that day ye shall know that I am in my Father, and ye in me, and I
+	in you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">21</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+	that hath my commandments, and keepeth them, he it is that loveth
+	me: and he that loveth me shall be loved of my Father, and I will
+	love him, and will manifest myself to him.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">22</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Judas
+	saith unto him, not Iscariot, Lord, how is it that thou wilt
+	manifest thyself unto us, and not unto the world? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">23</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+	answered and said unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+	a man love me, he will keep my words: and my Father will love him,
+	and we will come unto him, and make our abode with him. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">24</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+	that loveth me not keepeth not my sayings: and the word which ye
+	hear is not mine, but the Father's which sent me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">25</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">These
+	things have I spoken unto you, being yet present with you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">26</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">But
+	the Comforter, which is the Holy Ghost, whom the Father will send in
+	my name, he shall teach you all things, and bring all things to your
+	remembrance, whatsoever I have said unto you. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">27</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Peace
+	I leave with you, my peace I give unto you: not as the world giveth,
+	give I unto you. Let not your heart be troubled, neither let it be
+	afraid. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">28</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Ye
+	have heard how I said unto you, I go away, and come again unto you.
+	If ye loved me, ye would rejoice, because I said, I go unto the
+	Father: for my Father is greater than I. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">29</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+	now I have told you before it come to pass, that, when it is come to
+	pass, ye might believe. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">30</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Hereafter
+	I will not talk much with you: for the prince of this world cometh,
+	and hath nothing in me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">31</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">But
+	that the world may know that I love the Father; and as the Father
+	gave me commandment, even so I do. Arise, let us go hence. </FONT></FONT>
+	</P>
+  </div>
+
+  </div>
+
+<div class="w3-container w3-black w3-center w3-padding-64 neon">
+    <h1 style="font-size: 50px">Rose Aluli Quote Goes Here.</h1>
+</div>
+<!-- Footer -->
+
+<script>
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+  </body>
+</html>

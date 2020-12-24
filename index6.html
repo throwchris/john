@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+
+    <script>
+      function fetch() {
+        // GET SEARCH TERM
+        var data = new FormData();
+        data.append('search', document.getElementById("search").value);
+        data.append('ajax', 1);
+        // AJAX SEARCH REQUEST
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "search.php", true);
+        xhr.onload = function () {
+          if (this.status==200) {
+            var results = JSON.parse(this.response),
+                wrapper = document.getElementById("results");
+            wrapper.innerHTML = "";
+            if (results.length > 0) {
+              for(var res of results) {
+                var popup = document.createElement("div");
+                popup.innerHTML = res['name'] + " - " + res['definition'];
+                popup.classList.add("popup");
+                popup.onclick = function(){this.remove();};
+                document.body.appendChild(popup);
+              }
+            } else {
+              popup.innerHTML = "No results found";
+            }
+          } else {
+            alert("ERROR LOADING FILE!");
+          }
+        };
+        xhr.send(data);
+        return false;
+      }
+    </script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee, {font-size:200px}
+</style>
+  </head>
+  <body>
+  <div class="w3-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand neon" href="#">Jesus Christ Forever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PerfectChurch.com</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.html">Chapters 1 & 2</a> <!-- index.html -->
+            <a class="dropdown-item" href="index2.html">Chapters 3 & 4</a> <!-- index2.html -->
+            <a class="dropdown-item" href="index3.html">Chapters 5 & 6</a> <!-- index3.html -->
+            <a class="dropdown-item" href="index4.html">Chapters 7 & 8</a> <!-- index4.html -->
+            <a class="dropdown-item" href="index5.html">Chapters 9 & 10</a> <!-- index5.html -->
+            <a class="dropdown-item" href="index6.html">Chapters 11 & 12</a> <!-- index6.html -->
+            <a class="dropdown-item" href="index7.html">Chapters 13 & 14</a> <!-- index7.html -->
+            <a class="dropdown-item" href="index8.html">Chapters 15 & 16</a> <!-- index8.html -->
+            <a class="dropdown-item" href="index9.html">Chapters 17 & 18</a> <!-- index9.html -->
+            <a class="dropdown-item" href="index10.html">Chapters 19 & 20</a> <!-- index10.html -->
+            <a class="dropdown-item" href="index11.html">Chapter 21</a>       <!-- index11.html -->
+        </li>
+        </ul>
+      <form onsubmit="return fetch();">
+
+        <input type="text" id="search" required/>
+        <input type="submit" class="button" value="Search"/>
+      </form>
+      <div id="results"></div>
+    </div>
+    </nav>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+
+          <h1 style="font-size: 60px" class="animate__animated animate__bounceInDown neon">The Gospel According To John.</h1>
+          <p style="font-size: 30px" class="animate__animated animate__bounceInUp neon">"This is the disciple which testifieth of these things, and wrote these things: and we know that his testimony is true."</p>
+
+    <a href="index5.html"><button type="submit" class="button" style="margin:20px">back</button></a>
+    <a href="index7.html"><button type="submit" class="button" style="margin:20px">Next</button></a>
+    </header>
+
+    <div id="content">
+        <div id="left">
+
+          <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+          <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 11</FONT></P>
+          <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+          </P>
+        <!-- Paste 1st chapter under here -->
+        <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+      	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+      	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>N</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>ow
+      	a certain man was sick, named Lazarus</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+      	of Bethany, the town of Mary and her sister Martha. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">(It
+      	was that Mary which anointed the Lord with ointment, and wiped his
+      	feet with her hair, whose brother Lazarus was sick.) </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+      	his sisters sent unto him, saying, Lord, behold, he whom thou lovest
+      	is sick. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">When
+      	Jesus heard that, he said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">This
+      	sickness is not unto death, but for the glory of God, that the Son
+      	of God might be glorified thereby. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+      	Jesus loved Martha, and her sister, and Lazarus. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">When
+      	he had heard therefore that he was sick, he abode two days still in
+      	the same place where he was. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	after that saith he to his disciples, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Let
+      	us go into Judaea again. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">His
+      	disciples say unto him, Master, the Jews of late sought to stone
+      	thee; and goest thou thither again? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+      	answered, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Are
+      	there not twelve hours in the day? If any man walk in the day, he
+      	stumbleth not, because he seeth the light of this world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">But
+      	if a man walk in the night, he stumbleth, because there is no light
+      	in him.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">These
+      	things said he: and after that he saith unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Our
+      	friend Lazarus sleepeth; but I go, that I may awake him out of
+      	sleep. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	said his disciples, Lord, if he sleep, he shall do well. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Howbeit
+      	Jesus spake of his death: but they thought that he had spoken of
+      	taking of rest in sleep. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	said Jesus unto them plainly, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Lazarus
+      	is dead. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+      	I am glad for your sakes that I was not there, to the intent ye may
+      	believe; nevertheless let us go unto him.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+      	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	said Thomas, which is called Didymus, unto his fellow disciples, Let
+      	us also go, that we may die with him.</FONT></P>
+      	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+      	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	when Jesus came, he found that he had lain in the grave four days
+      	already. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+      	Bethany was nigh unto Jerusalem, about fifteen furlongs off: </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">19</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">and
+      	many of the Jews came to Martha and Mary, to comfort them concerning
+      	their brother. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">20</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	Martha, as soon as she heard that Jesus was coming, went and met
+      	him: but Mary sat still in the house. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">21</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	said Martha unto Jesus, Lord, if thou hadst been here, my brother
+      	had not died. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">22</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+      	I know, that even now, whatsoever thou wilt ask of God, God will
+      	give it thee. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">23</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+      	saith unto her, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Thy
+      	brother shall rise again. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">24</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Martha
+      	saith unto him, I know that he shall rise again in the resurrection
+      	at the last day. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">25</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+      	said unto her, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+      	am the resurrection, and the life: he that believeth in me, though
+      	he were dead, yet shall he live: </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">26</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">and
+      	whosoever liveth and believeth in me shall never die. Believest thou
+      	this?</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">27</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">She
+      	saith unto him, Yea, Lord: I believe that thou art the Christ, the
+      	Son of God, which should come into the world. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">28</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+      	when she had so said, she went her way, and called Mary her sister
+      	secretly, saying, The Master is come, and calleth for thee. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">29</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">As
+      	soon as she heard that, she arose quickly, and came unto him.</FONT></P>
+      	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+      	 <FONT SIZE=4 STYLE="font-size: 16pt"><SUP>30</SUP>Now Jesus was not
+      	yet come into the town, but was in that place where Martha met him.
+      	<SUP>31</SUP>The Jews then which were with her in the house, and
+      	comforted her, when they saw Mary, that she rose up hastily and went
+      	out, followed her, saying, She goeth unto the grave to weep there.
+      	<SUP>32</SUP>Then when Mary was come where Jesus was, and saw him,
+      	she fell down at his feet, saying unto him, Lord, if thou hadst been
+      	here, my brother had not died. <SUP>33</SUP>When Jesus therefore saw
+      	her weeping, and the Jews also weeping which came with her, he
+      	groaned in the spirit, and was troubled, <SUP>34</SUP>and said,
+      	<FONT COLOR="#ff0000">Where have ye laid him?</FONT> They said unto
+      	him, Lord, come and see. <SUP>35</SUP>Jesus wept. <SUP>36</SUP>Then
+      	said the Jews, Behold how he loved him! <SUP>37</SUP>And some of
+      	them said, Could not this man, which opened the eyes of the blind,
+      	have caused that even this man should not have died? <SUP>38</SUP>Jesus
+      	therefore again groaning in himself cometh to the grave. It was a
+      	cave, and a stone lay upon it. <SUP>39</SUP>Jesus said, <FONT COLOR="#ff0000">Take
+      	ye away the stone.</FONT> Martha, the sister of him that was dead,
+      	saith unto him, Lord, by this time he stinketh: for he hath been
+      	dead four days. <SUP>40</SUP>Jesus saith unto her, <FONT COLOR="#ff0000">Said
+      	I not unto thee, that, if thou wouldest believe, thou shouldest see
+      	the glory of God? </FONT><SUP>41</SUP>Then they took away the stone
+      	from the place where the dead was laid. And Jesus lifted up his
+      	eyes, and said, <FONT COLOR="#ff0000">Father, I thank thee that thou
+      	hast heard me. </FONT><FONT COLOR="#ff0000"><SUP>42</SUP></FONT><FONT COLOR="#ff0000">And
+      	I knew that thou hearest me always: but because of the people which
+      	stand by I said it, that they may believe that thou hast sent me.</FONT>
+      	<SUP>43</SUP>And when he thus had spoken, he cried with a loud
+      	voice, <FONT COLOR="#ff0000">Lazarus, come forth. </FONT><SUP>44</SUP>And
+      	he that was dead came forth, bound hand and foot with graveclothes:
+      	and his face was bound about with a napkin. Jesus saith unto them,
+      	<FONT COLOR="#ff0000">Loose him, and let him go. </FONT><SUP>45</SUP>Then
+      	many of the Jews which came to Mary, and had seen the things which
+      	Jesus did, believed on him. <SUP>46</SUP>But some of them went their
+      	ways to the Pharisees, and told them what things Jesus had done. </FONT>
+      	</P>
+      	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+      	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>47</SUP>Then gathered the
+      	chief priests and the Pharisees a council, and said, What do we? for
+      	this man doeth many miracles. <SUP>48</SUP>If we let him thus alone,
+      	all men will believe on him: and the Romans shall come and take away
+      	both our place and nation. <SUP>49</SUP>And one of them, named
+      	Caiaphas, being the high priest that same year, said unto them, Ye
+      	know nothing at all, <SUP>50</SUP>nor consider that it is expedient
+      	for us, that one man should die for the people, and that the whole
+      	nation perish not. <SUP>51</SUP>And this spake he not of himself:
+      	but being high priest that year, he prophesied that Jesus should die
+      	for that nation; <SUP>52</SUP>and not for that nation only, but that
+      	also he should gather together in one the children of God that were
+      	scattered abroad. <SUP>53</SUP>Then from that day forth they took
+      	counsel together for to put him to death. <SUP>54</SUP>Jesus
+      	therefore walked no more openly among the Jews; but went thence unto
+      	a country near to the wilderness, into a city called Ephraim, and
+      	there continued with his disciples. </FONT>
+      	</P>
+      	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+      	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">55</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+      	the Jews' passover was nigh at hand: and many went out of the
+      	country up to Jerusalem before the passover, to purify themselves.
+      	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">56</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+      	sought they for Jesus, and spake among themselves, as they stood in
+      	the temple, What think ye, that he will not come to the feast? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">57</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+      	both the chief priests and the Pharisees had given a commandment,
+      	that, if any man knew where he were, he should shew it, that they
+      	might take him. </FONT>
+      	</P>
+  </div>
+  <div id="right">
+
+    <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+    <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 12</FONT></P>
+    <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+    </P>
+    <!-- Paste 2nd chapter under here -->
+    <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>T</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>hen
+    	Jesus six days before the passover</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	came to Bethany, where Lazarus was which had been dead, whom he
+    	raised from the dead. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">There
+    	they made him a supper; and Martha served: but Lazarus was one of
+    	them that sat at the table with him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	took Mary a pound of ointment of spikenard, very costly, and
+    	anointed the feet of Jesus, and wiped his feet with her hair: and
+    	the house was filled with the odour of the ointment. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	saith one of his disciples, Judas Iscariot, Simon's son, which
+    	should betray him, </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Why
+    	was not this ointment sold for three hundred pence, and given to the
+    	poor? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">This
+    	he said, not that he cared for the poor; but because he was a thief,
+    	and had the bag, and bare what was put therein. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	said Jesus, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Let
+    	her alone: against the day of my burying hath she kept this. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">For
+    	the poor always ye have with you; but me ye have not always.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Much
+    	people of the Jews therefore knew that he was there: and they came
+    	not for Jesus' sake only, but that they might see Lazarus also, whom
+    	he had raised from the dead. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+    	the chief priests consulted that they might put Lazarus also to
+    	death; </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">because
+    	that by reason of him many of the Jews went away, and believed on
+    	Jesus. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">On
+    	the next day much people that were come to the feast, when they
+    	heard that Jesus was coming to Jerusalem, </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">took
+    	branches of palm trees, and went forth to meet him, and cried,
+    	Hosanna: Blessed is the King of Israel that cometh in the name of
+    	the Lord. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	Jesus, when he had found a young ass, sat thereon; as it is written,
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Fear
+    	not, daughter of Sion: behold, thy King cometh, sitting on an ass's
+    	colt. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">These
+    	things understood not his disciples at the first: but when Jesus was
+    	glorified, then remembered they that these things were written of
+    	him, and that they had done these things unto him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	people therefore that was with him when he called Lazarus out of his
+    	grave, and raised him from the dead, bare record. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">For
+    	this cause the people also met him, for that they heard that he had
+    	done this miracle. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">19</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	Pharisees therefore said among themselves, Perceive ye how ye
+    	prevail nothing? behold, the world is gone after him. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">20</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	there were certain Greeks among them that came up to worship at the
+    	feast: </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">21</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">the
+    	same came therefore to Philip, which was of Bethsaida of Galilee,
+    	and desired him, saying, Sir, we would see Jesus. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">22</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Philip
+    	cometh and telleth Andrew: and again Andrew and Philip tell Jesus.
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">23</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	Jesus answered them, saying, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	hour is come, that the Son of man should be glorified. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">24</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Verily,
+    	verily, I say unto you, Except a corn of wheat fall into the ground
+    	and die, it abideth alone: but if it die, it bringeth forth much
+    	fruit. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">25</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+    	that loveth his life shall lose it; and he that hateth his life in
+    	this world shall keep it unto life eternal. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">26</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+    	any man serve me, let him follow me; and where I am, there shall
+    	also my servant be: if any man serve me, him will my Father honour.
+    	</FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">27</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Now
+    	is my soul troubled; and what shall I say? Father, save me from this
+    	hour: but for this cause came I unto this hour. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">28</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Father,
+    	glorify thy name.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	Then came there a voice from heaven, saying, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt"><B>I
+    	have both glorified it, and will glorify it again.</B></FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">29</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	people therefore, that stood by, and heard it, said that it
+    	thundered: others said, An angel spake to him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">30</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+    	answered and said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">This
+    	voice came not because of me, but for your sakes. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">31</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Now
+    	is the judgment of this world: now shall the prince of this world be
+    	cast out. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">32</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	I, if I be lifted up from the earth, will draw all men unto me.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">33</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">This
+    	he said, signifying what death he should die. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">34</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	people answered him, We have heard out of the law that Christ
+    	abideth for ever: and how sayest thou, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	Son of man must be lifted up?</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	who is this Son of man? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">35</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	Jesus said unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Yet
+    	a little while is the light with you. Walk while ye have the light,
+    	lest darkness come upon you: for he that walketh in darkness knoweth
+    	not whither he goeth. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">36</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">While
+    	ye have light, believe in the light, that ye may be the children of
+    	light.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> These
+    	things spake Jesus, and departed, and did hide himself from them. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">37</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+    	though he had done so many miracles before them, yet they believed
+    	not on him: </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">38</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">that
+    	the saying of Esaias the prophet might be fulfilled, which he spake,
+    	Lord, who hath believed our report? and to whom hath the arm of the
+    	Lord been revealed? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">39</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+    	they could not believe, because that Esaias said again, </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">40</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+    	hath blinded their eyes, and hardened their heart; that they should
+    	not see with their eyes, nor understand with their heart, and be
+    	converted, and I should heal them. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">41</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">These
+    	things said Esaias, when he saw his glory, and spake of him.
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">42</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Nevertheless
+    	among the chief rulers also many believed on him; but because of the
+    	Pharisees they did not confess him, lest they should be put out of
+    	the synagogue: </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">43</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">for
+    	they loved the praise of men more than the praise of God. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">44</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+    	cried and said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+    	that believeth on me, believeth not on me, but on him that sent me.
+    	</FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">45</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	he that seeth me seeth him that sent me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">46</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am come a light into the world, that whosoever believeth on me
+    	should not abide in darkness. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">47</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	if any man hear my words, and believe not, I judge him not: for I
+    	came not to judge the world, but to save the world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">48</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+    	that rejecteth me, and receiveth not my words, hath one that judgeth
+    	him: the word that I have spoken, the same shall judge him in the
+    	last day. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">49</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">For
+    	I have not spoken of myself; but the Father which sent me, he gave
+    	me a commandment, what I should say, and what I should speak. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">50</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	I know that his commandment is life everlasting: whatsoever I speak
+    	therefore, even as the Father said unto me, so I speak.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT>
+    	</P>
+  </div>
+
+  </div>
+
+<div class="w3-container w3-black w3-center w3-padding-64 neon">
+    <h1 style="font-size: 50px">Rose Aluli Quote Goes Here.</h1>
+</div>
+<!-- Footer -->
+
+<script>
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+  </body>
+</html>

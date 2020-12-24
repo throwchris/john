@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+
+    <script>
+      function fetch() {
+        // GET SEARCH TERM
+        var data = new FormData();
+        data.append('search', document.getElementById("search").value);
+        data.append('ajax', 1);
+        // AJAX SEARCH REQUEST
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "search.php", true);
+        xhr.onload = function () {
+          if (this.status==200) {
+            var results = JSON.parse(this.response),
+                wrapper = document.getElementById("results");
+            wrapper.innerHTML = "";
+            if (results.length > 0) {
+              for(var res of results) {
+                var popup = document.createElement("div");
+                popup.innerHTML = res['name'] + " - " + res['definition'];
+                popup.classList.add("popup");
+                popup.onclick = function(){this.remove();};
+                document.body.appendChild(popup);
+              }
+            } else {
+              popup.innerHTML = "No results found";
+            }
+          } else {
+            alert("ERROR LOADING FILE!");
+          }
+        };
+        xhr.send(data);
+        return false;
+      }
+    </script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee, {font-size:200px}
+</style>
+  </head>
+  <body>
+  <div class="w3-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand neon" href="#">Jesus Christ Forever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PerfectChurch.com</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.html">Chapters 1 & 2</a> <!-- index.html -->
+            <a class="dropdown-item" href="index2.html">Chapters 3 & 4</a> <!-- index2.html -->
+            <a class="dropdown-item" href="index3.html">Chapters 5 & 6</a> <!-- index3.html -->
+            <a class="dropdown-item" href="index4.html">Chapters 7 & 8</a> <!-- index4.html -->
+            <a class="dropdown-item" href="index5.html">Chapters 9 & 10</a> <!-- index5.html -->
+            <a class="dropdown-item" href="index6.html">Chapters 11 & 12</a> <!-- index6.html -->
+            <a class="dropdown-item" href="index7.html">Chapters 13 & 14</a> <!-- index7.html -->
+            <a class="dropdown-item" href="index8.html">Chapters 15 & 16</a> <!-- index8.html -->
+            <a class="dropdown-item" href="index9.html">Chapters 17 & 18</a> <!-- index9.html -->
+            <a class="dropdown-item" href="index10.html">Chapters 19 & 20</a> <!-- index10.html -->
+            <a class="dropdown-item" href="index11.html">Chapter 21</a>       <!-- index11.html -->
+        </li>
+        </ul>
+      <form onsubmit="return fetch();">
+
+        <input type="text" id="search" required/>
+        <input type="submit" class="button" value="Search"/>
+      </form>
+      <div id="results"></div>
+    </div>
+    </nav>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+
+          <h1 style="font-size: 60px" class="animate__animated animate__bounceInDown neon">The Gospel According To John.</h1>
+          <p style="font-size: 30px" class="animate__animated animate__bounceInUp neon">"This is the disciple which testifieth of these things, and wrote these things: and we know that his testimony is true."</p>
+
+    <a href="index4.html"><button type="submit" class="button" style="margin:20px">back</button></a>
+    <a href="index6.html"><button type="submit" class="button" style="margin:20px">Next</button></a>
+    </header>
+
+    <div id="content">
+        <div id="left">
+
+          <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+          <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 9</FONT></P>
+          <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+          </P>
+        <!-- Paste 1st chapter under here -->
+        <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=6 STYLE="font-size: 30pt">
+        	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>A</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>nd
+        	as Jesus passed by, he saw a man</B></FONT><FONT SIZE=6 STYLE="font-size: 30pt">
+        	</FONT><FONT SIZE=4 STYLE="font-size: 16pt">which was blind from his
+        	birth. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	his disciples asked him, saying, Master, who did sin, this man, or
+        	his parents, that he was born blind? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+        	answered, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Neither
+        	hath this man sinned, nor his parents: but that the works of God
+        	should be made manifest in him. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	must work the works of him that sent me, while it is day: the night
+        	cometh, when no man can work. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">As
+        	long as I am in the world, I am the light of the world. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">When
+        	he had thus spoken, he spat on the ground, and made clay of the
+        	spittle, and he anointed the eyes of the blind man with the clay,
+        	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">and
+        	said unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Go,
+        	wash in the pool of Siloam,</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+        	(which is by interpretation, Sent.) He went his way therefore, and
+        	washed, and came seeing. </FONT>
+        	</P>
+        	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+        	neighbours therefore, and they which before had seen him that he was
+        	blind, said, Is not this he that sat and begged? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Some
+        	said, This is he: others said, He is like him: but he said, I am he.
+        	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+        	said they unto him, How were thine eyes opened? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+        	answered and said, A man that is called Jesus made clay, and
+        	anointed mine eyes, and said unto me, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Go
+        	to the pool of Siloam, and wash:</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+        	and I went and washed, and I received sight. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+        	said they unto him, Where is he? He said, I know not. </FONT>
+        	</P>
+        	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">They
+        	brought to the Pharisees him that aforetime was blind. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	it was the sabbath day when Jesus made the clay, and opened his
+        	eyes. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+        	again the Pharisees also asked him how he had received his sight. He
+        	said unto them, He put clay upon mine eyes, and I washed, and do
+        	see. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+        	said some of the Pharisees, This man is not of God, because he
+        	keepeth not the sabbath day. Others said, How can a man that is a
+        	sinner do such miracles? And there was a division among them. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">They
+        	say unto the blind man again, What sayest thou of him, that he hath
+        	opened thine eyes? He said, He is a prophet. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+        	the Jews did not believe concerning him, that he had been blind, and
+        	received his sight, until they called the parents of him that had
+        	received his sight. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">19</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	they asked them, saying, Is this your son, who ye say was born
+        	blind? how then doth he now see? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">20</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">His
+        	parents answered them and said, We know that this is our son, and
+        	that he was born blind: </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">21</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">but
+        	by what means he now seeth, we know not; or who hath opened his
+        	eyes, we know not: he is of age; ask him: he shall speak for
+        	himself. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">22</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">These
+        	words spake his parents, because they feared the Jews: for the Jews
+        	had agreed already, that if any man did confess that he was Christ,
+        	he should be put out of the synagogue. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">23</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+        	said his parents, He is of age; ask him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">24</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+        	again called they the man that was blind, and said unto him, Give
+        	God the praise: we know that this man is a sinner. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">25</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+        	answered and said, Whether he be a sinner or no, I know not: one
+        	thing I know, that, whereas I was blind, now I see. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">26</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+        	said they to him again, What did he to thee? how opened he thine
+        	eyes? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">27</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+        	answered them, I have told you already, and ye did not hear:
+        	wherefore would ye hear it again? will ye also be his disciples?
+        	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">28</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+        	they reviled him, and said, Thou art his disciple; but we are Moses'
+        	disciples. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">29</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">We
+        	know that God spake unto Moses: as for this fellow, we know not from
+        	whence he is. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">30</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+        	man answered and said unto them, Why herein is a marvellous thing,
+        	that ye know not from whence he is, and yet he hath opened mine
+        	eyes. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">31</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+        	we know that God heareth not sinners: but if any man be a worshipper
+        	of God, and doeth his will, him he heareth. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">32</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Since
+        	the world began was it not heard that any man opened the eyes of one
+        	that was born blind. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">33</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">If
+        	this man were not of God, he could do nothing. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">34</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">They
+        	answered and said unto him, Thou wast altogether born in sins, and
+        	dost thou teach us? And they cast him out. </FONT>
+        	</P>
+        	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	 <SUP><FONT SIZE=4 STYLE="font-size: 16pt">35</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+        	heard that they had cast him out; and when he had found him, he said
+        	unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Dost
+        	thou believe on the Son of God? </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">36</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">He
+        	answered and said, Who is he, Lord, that I might believe on him?
+        	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">37</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	Jesus said unto him, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Thou
+        	hast both seen him, and it is he that talketh with thee. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">38</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	he said, Lord, I believe. And he worshipped him. </FONT>
+        	</P>
+        	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">39</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	Jesus said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">For
+        	judgment I am come into this world, that they which see not might
+        	see; and that they which see might be made blind. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">40</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	some of the Pharisees which were with him heard these words, and
+        	said unto him, Are we blind also? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">41</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+        	said unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">If
+        	ye were blind, ye should have no sin: but now ye say, We see;
+        	therefore your sin remaineth. </FONT></FONT>
+        	</P>
+  </div>
+  <div id="right">
+
+    <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+    <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 10</FONT></P>
+    <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+    </P>
+    <!-- Paste 2nd chapter under here -->
+    <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>V</B></I></FONT></FONT><FONT COLOR="#ff0000"><FONT SIZE=5 STYLE="font-size: 20pt"><B>erily,
+    	verily, I say unto you,</B></FONT></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">
+    	He that entereth not by the door into the sheepfold, but climbeth up
+    	some other way, the same is a thief and a robber. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">But
+    	he that entereth in by the door is the shepherd of the sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">To
+    	him the porter openeth; and the sheep hear his voice: and he calleth
+    	his own sheep by name, and leadeth them out. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	when he putteth forth his own sheep, he goeth before them, and the
+    	sheep follow him: for they know his voice. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	a stranger will they not follow, but will flee from him: for they
+    	know not the voice of strangers.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">This
+    	parable spake Jesus unto them: but they understood not what things
+    	they were which he spake unto them. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	said Jesus unto them again, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Verily,
+    	verily, I say unto you, I am the door of the sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">All
+    	that ever came before me are thieves and robbers: but the sheep did
+    	not hear them. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am the door: by me if any man enter in, he shall be saved, and shall
+    	go in and out, and find pasture. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	thief cometh not, but for to steal, and to kill, and to destroy: I
+    	am come that they might have life, and that they might have it more
+    	abundantly. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am the good shepherd: the good shepherd giveth his life for the
+    	sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">But
+    	he that is an hireling, and not the shepherd, whose own the sheep
+    	are not, seeth the wolf coming, and leaveth the sheep, and fleeth:
+    	and the wolf catcheth them, and scattereth the sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">The
+    	hireling fleeth, because he is an hireling, and careth not for the
+    	sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am the good shepherd, and know my sheep, and am known of mine. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">As
+    	the Father knoweth me, even so know I the Father: and I lay down my
+    	life for the sheep. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	other sheep I have, which are not of this fold: them also I must
+    	bring, and they shall hear my voice; and there shall be one fold,
+    	and one shepherd. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Therefore
+    	doth my Father love me, because I lay down my life, that I might
+    	take it again. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">No
+    	man taketh it from me, but I lay it down of myself. I have power to
+    	lay it down, and I have power to take it again. This commandment
+    	have I received of my Father. </FONT></FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>19</SUP>There was a
+    	division therefore again among the Jews for these sayings. <SUP>20</SUP>And
+    	many of them said, He hath a devil, and is mad; why hear ye him?
+    	<SUP>21</SUP>Others said, These are not the words of him that hath a
+    	devil. Can a devil open the eyes of the blind? </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>22</SUP>And it was at
+    	Jerusalem the feast of the dedication, and it was winter. <SUP>23</SUP>And
+    	Jesus walked in the temple in Solomon's porch. <SUP>24</SUP>Then
+    	came the Jews round about him, and said unto him, How long dost thou
+    	make us to doubt? If thou be the Christ, tell us plainly. <SUP>25</SUP>Jesus
+    	answered them, <FONT COLOR="#ff0000">I told you, and ye believed
+    	not: the works that I do in my Father's name, they bear witness of
+    	me. </FONT><FONT COLOR="#ff0000"><SUP>26</SUP></FONT><FONT COLOR="#ff0000">But
+    	ye believe not, because ye are not of my sheep, as I said unto you.
+    	</FONT><FONT COLOR="#ff0000"><SUP>27</SUP></FONT><FONT COLOR="#ff0000">My
+    	sheep hear my voice, and I know them, and they follow me: </FONT><FONT COLOR="#ff0000"><SUP>28</SUP></FONT><FONT COLOR="#ff0000">and
+    	I give unto them eternal life; and they shall never perish, neither
+    	shall any man pluck them out of my hand. </FONT><FONT COLOR="#ff0000"><SUP>29</SUP></FONT><FONT COLOR="#ff0000">My
+    	Father, which gave them me, is greater than all; and no man is able
+    	to pluck them out of my Father's hand. </FONT><FONT COLOR="#ff0000"><SUP>30</SUP></FONT><FONT COLOR="#ff0000">I
+    	and my Father are one.</FONT> <SUP>31</SUP>Then the Jews took up
+    	stones again to stone him. <SUP>32</SUP>Jesus answered them, <FONT COLOR="#ff0000">Many
+    	good works have I shewed you from my Father; for which of those
+    	works do ye stone me? </FONT><SUP>33</SUP>The Jews answered him,
+    	saying, For a good work we stone thee not; but for blasphemy; and
+    	because that thou, being a man, makest thyself God. <SUP>34</SUP>Jesus
+    	answered them, <FONT COLOR="#ff0000">Is it not written in your law,
+    	I said, Ye are gods? </FONT><FONT COLOR="#ff0000"><SUP>35</SUP></FONT><FONT COLOR="#ff0000">If
+    	he called them gods, unto whom the word of God came, and the
+    	scripture cannot be broken; </FONT><FONT COLOR="#ff0000"><SUP>36</SUP></FONT><FONT COLOR="#ff0000">say
+    	ye of him, whom the Father hath sanctified, and sent into the world,
+    	Thou blasphemest; because I said, I am the Son of God? </FONT><FONT COLOR="#ff0000"><SUP>37</SUP></FONT><FONT COLOR="#ff0000">If
+    	I do not the works of my Father, believe me not. </FONT><FONT COLOR="#ff0000"><SUP>38</SUP></FONT><FONT COLOR="#ff0000">But
+    	if I do, though ye believe not me, believe the works: that ye may
+    	know, and believe, that the Father is in me, and I in him.</FONT>
+    	<SUP>39</SUP>Therefore they sought again to take him: but he escaped
+    	out of their hand, <SUP>40</SUP>and went away again beyond Jordan
+    	into the place where John at first baptized; and there he abode.
+    	<SUP>41</SUP>And many resorted unto him, and said, John did no
+    	miracle: but all things that John spake of this man were true. <SUP>42</SUP>And
+    	many believed on him there. </FONT>
+    	</P>
+  </div>
+
+  </div>
+
+<div class="w3-container w3-black w3-center w3-padding-64 neon">
+    <h1 style="font-size: 50px">Rose Aluli Quote Goes Here.</h1>
+</div>
+<!-- Footer -->
+
+<script>
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+  </body>
+</html>

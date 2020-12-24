@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+
+    <script>
+      function fetch() {
+        // GET SEARCH TERM
+        var data = new FormData();
+        data.append('search', document.getElementById("search").value);
+        data.append('ajax', 1);
+        // AJAX SEARCH REQUEST
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "search.php", true);
+        xhr.onload = function () {
+          if (this.status==200) {
+            var results = JSON.parse(this.response),
+                wrapper = document.getElementById("results");
+            wrapper.innerHTML = "";
+            if (results.length > 0) {
+              for(var res of results) {
+                var popup = document.createElement("div");
+                popup.innerHTML = res['name'] + " - " + res['definition'];
+                popup.classList.add("popup");
+                popup.onclick = function(){this.remove();};
+                document.body.appendChild(popup);
+              }
+            } else {
+              popup.innerHTML = "No results found";
+            }
+          } else {
+            alert("ERROR LOADING FILE!");
+          }
+        };
+        xhr.send(data);
+        return false;
+      }
+    </script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee, {font-size:200px}
+</style>
+  </head>
+  <body>
+  <div class="w3-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand neon" href="#">Jesus Christ: The Same Yesterday, Today, and Forever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PerfectChurch.com</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.html">Chapters 1 & 2</a> <!-- index.html -->
+            <a class="dropdown-item" href="index2.html">Chapters 3 & 4</a> <!-- index2.html -->
+            <a class="dropdown-item" href="index3.html">Chapters 5 & 6</a> <!-- index3.html -->
+            <a class="dropdown-item" href="index4.html">Chapters 7 & 8</a> <!-- index4.html -->
+            <a class="dropdown-item" href="index5.html">Chapters 9 & 10</a> <!-- index5.html -->
+            <a class="dropdown-item" href="index6.html">Chapters 11 & 12</a> <!-- index6.html -->
+            <a class="dropdown-item" href="index7.html">Chapters 13 & 14</a> <!-- index7.html -->
+            <a class="dropdown-item" href="index8.html">Chapters 15 & 16</a> <!-- index8.html -->
+            <a class="dropdown-item" href="index9.html">Chapters 17 & 18</a> <!-- index9.html -->
+            <a class="dropdown-item" href="index10.html">Chapters 19 & 20</a> <!-- index10.html -->
+            <a class="dropdown-item" href="index11.html">Chapter 21</a>       <!-- index11.html -->
+        </li>
+        </ul>
+      <form onsubmit="return fetch();">
+
+        <input type="text" id="search" required/>
+        <input type="submit" class="button" value="Search"/>
+      </form>
+      <div id="results"></div>
+    </div>
+    </nav>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+
+          <h1 style="font-size: 60px" class="animate__animated animate__bounceInDown neon">The Gospel According To John.</h1>
+          <p style="font-size: 30px" class="animate__animated animate__bounceInUp neon">"This is the disciple which testifieth of these things, and wrote these things: and we know that his testimony is true."</p>
+
+    <a href="index8.html"><button type="submit" class="button" style="margin:20px">back</button></a>
+    <a href="index10.html"><button type="submit" class="button" style="margin:20px">Next</button></a>
+    </header>
+
+    <div id="content">
+        <div id="left">
+
+          <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+          <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 17</FONT></P>
+          <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+          </P>
+        <!-- Paste 1st chapter under here -->
+        <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+        	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+        	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>T</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>hese
+        	words spake Jesus</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">,
+        	and lifted up his eyes to heaven, and said, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Father,
+        	the hour is come; glorify thy Son, that thy Son also may glorify
+        	thee: </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">as
+        	thou hast given him power over all flesh, that he should give
+        	eternal life to as many as thou hast given him. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	this is life eternal, that they might know thee the only true God,
+        	and Jesus Christ, whom thou hast sent. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	have glorified thee on the earth: I have finished the work which
+        	thou gavest me to do. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	now, O Father, glorify thou me with thine own self with the glory
+        	which I had with thee before the world was. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	have manifested thy name unto the men which thou gavest me out of
+        	the world: thine they were, and thou gavest them me; and they have
+        	kept thy word. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Now
+        	they have known that all things whatsoever thou hast given me are of
+        	thee. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">For
+        	I have given unto them the words which thou gavest me; and they have
+        	received them, and have known surely that I came out from thee, and
+        	they have believed that thou didst send me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	pray for them: I pray not for the world, but for them which thou
+        	hast given me; for they are thine. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	all mine are thine, and thine are mine; and I am glorified in them.
+        	</FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	now I am no more in the world, but these are in the world, and I
+        	come to thee. Holy Father, keep through thine own name those whom
+        	thou hast given me, that they may be one, as we are. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">While
+        	I was with them in the world, I kept them in thy name: those that
+        	thou gavest me I have kept, and none of them is lost, but the son of
+        	perdition; that the scripture might be fulfilled. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	now come I to thee; and these things I speak in the world, that they
+        	might have my joy fulfilled in themselves. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	have given them thy word; and the world hath hated them, because
+        	they are not of the world, even as I am not of the world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	pray not that thou shouldest take them out of the world, but that
+        	thou shouldest keep them from the evil. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">They
+        	are not of the world, even as I am not of the world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Sanctify
+        	them through thy truth: thy word is truth. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">As
+        	thou hast sent me into the world, even so have I also sent them into
+        	the world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">19</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	for their sakes I sanctify myself, that they also might be
+        	sanctified through the truth. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">20</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Neither
+        	pray I for these alone, but for them also which shall believe on me
+        	through their word; </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">21</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">that
+        	they all may be one; as thou, Father, art in me, and I in thee, that
+        	they also may be one in us: that the world may believe that thou
+        	hast sent me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">22</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	the glory which thou gavest me I have given them; that they may be
+        	one, even as we are one: </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">23</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+        	in them, and thou in me, that they may be made perfect in one; and
+        	that the world may know that thou hast sent me, and hast loved them,
+        	as thou hast loved me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">24</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Father,
+        	I will that they also, whom thou hast given me, be with me where I
+        	am; that they may behold my glory, which thou hast given me: for
+        	thou lovedst me before the foundation of the world. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">25</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">O
+        	righteous Father, the world hath not known thee: but I have known
+        	thee, and these have known that thou hast sent me. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">26</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">And
+        	I have declared unto them thy name, and will declare it: that the
+        	love wherewith thou hast loved me may be in them, and I in them.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+        	</FONT>
+        	</P>
+  </div>
+  <div id="right">
+
+    <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+    <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 18</FONT></P>
+    <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+    </P>
+    <!-- Paste 2nd chapter under here -->
+    <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>W</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>hen
+    	Jesus had spoken these words,</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	he went forth with his disciples over the brook Cedron, where was a
+    	garden, into the which he entered, and his disciples. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	Judas also, which betrayed him, knew the place: for Jesus ofttimes
+    	resorted thither with his disciples. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Judas
+    	then, having received a band of men and officers from the chief
+    	priests and Pharisees, cometh thither with lanterns and torches and
+    	weapons. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+    	therefore, knowing all things that should come upon him, went forth,
+    	and said unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Whom
+    	seek ye? </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">They
+    	answered him, Jesus of Nazareth. Jesus saith unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am he.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> And Judas
+    	also, which betrayed him, stood with them. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">As
+    	soon then as he had said unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	am he,</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> they went
+    	backward, and fell to the ground. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	asked he them again, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Whom
+    	seek ye?</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt"> And they
+    	said, Jesus of Nazareth. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Jesus
+    	answered, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">I
+    	have told you that I am he: if therefore ye seek me, let these go
+    	their way: </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">that
+    	the saying might be fulfilled, which he spake, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Of
+    	them which thou gavest me have I lost none. </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	Simon Peter having a sword drew it, and smote the high priest's
+    	servant, and cut off his right ear. The servant's name was Malchus.
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	said Jesus unto Peter, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Put
+    	up thy sword into the sheath: the cup which my Father hath given me,
+    	shall I not drink it? </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	the band and the captain and officers of the Jews took Jesus, and
+    	bound him, </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">and
+    	led him away to Annas first; for he was father in law to Caiaphas,
+    	which was the high priest that same year. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">14</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+    	Caiaphas was he, which gave counsel to the Jews, that it was
+    	expedient that one man should die for the people. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">15</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	Simon Peter followed Jesus, and so did another disciple: that
+    	disciple was known unto the high priest, and went in with Jesus into
+    	the palace of the high priest. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">16</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+    	Peter stood at the door without. Then went out that other disciple,
+    	which was known unto the high priest, and spake unto her that kept
+    	the door, and brought in Peter. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">17</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+    	saith the damsel that kept the door unto Peter, Art not thou also
+    	one of this man's disciples? He saith, I am not. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">18</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	the servants and officers stood there, who had made a fire of coals;
+    	for it was cold: and they warmed themselves: and Peter stood with
+    	them, and warmed himself. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>19</SUP>The high priest
+    	then asked Jesus of his disciples, and of his doctrine. <SUP>20</SUP>Jesus
+    	answered him, <FONT COLOR="#ff0000">I spake openly to the world; I
+    	ever taught in the synagogue, and in the temple, whither the Jews
+    	always resort; and in secret have I said nothing. </FONT><FONT COLOR="#ff0000"><SUP>21</SUP></FONT><FONT COLOR="#ff0000">Why
+    	askest thou me? ask them which heard me, what I have said unto them:
+    	behold, they know what I said.</FONT> <SUP>22</SUP>And when he had
+    	thus spoken, one of the officers which stood by struck Jesus with
+    	the palm of his hand, saying, Answerest thou the high priest so?
+    	<SUP>23</SUP>Jesus answered him, <FONT COLOR="#ff0000">If I have
+    	spoken evil, bear witness of the evil: but if well, why smitest thou
+    	me? </FONT><SUP>24</SUP>Now Annas had sent him bound unto Caiaphas
+    	the high priest. <SUP>     25</SUP>And Simon Peter stood and warmed
+    	himself. They said therefore unto him, Art not thou also one of his
+    	disciples? He denied it, and said, I am not. <SUP>26</SUP>One of the
+    	servants of the high priest, being his kinsman whose ear Peter cut
+    	off, saith, Did not I see thee in the garden with him? <SUP>27</SUP>Peter
+    	then denied again: and immediately the cock crew. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>28</SUP>Then led they
+    	Jesus from Caiaphas unto the hall of judgment: and it was early; and
+    	they themselves went not into the judgment hall, lest they should be
+    	defiled; but that they might eat the passover. <SUP>29</SUP>Pilate
+    	then went out unto them, and said, What accusation bring ye against
+    	this man? <SUP>30</SUP>They answered and said unto him, If he were
+    	not a malefactor, we would not have delivered him up unto thee.
+    	<SUP>31</SUP>Then said Pilate unto them, Take ye him, and judge him
+    	according to your law. The Jews therefore said unto him, It is not
+    	lawful for us to put any man to death: <SUP>32</SUP>that the saying
+    	of Jesus might be fulfilled, which he spake, signifying what death
+    	he should die. <SUP>33</SUP>Then Pilate entered into the judgment
+    	hall again, and called Jesus, and said unto him, Art thou the King
+    	of the Jews? <SUP>34</SUP>Jesus answered him, <FONT COLOR="#ff0000">Sayest
+    	thou this thing of thyself, or did others tell it thee of me?
+    	</FONT><SUP>35</SUP>Pilate answered, Am I a Jew? Thine own nation
+    	and the chief priests have delivered thee unto me: what hast thou
+    	done? <SUP>36</SUP>Jesus answered, <FONT COLOR="#ff0000">My kingdom
+    	is not of this world: if my kingdom were of this world, then would
+    	my servants fight, that I should not be delivered to the Jews: but
+    	now is my kingdom not from hence. </FONT><SUP>37</SUP>Pilate
+    	therefore said unto him, Art thou a king then? Jesus answered, <FONT COLOR="#ff0000">Thou
+    	sayest that I am a king. To this end was I born, and for this cause
+    	came I into the world, that I should bear witness unto the truth.
+    	Every one that is of the truth heareth my voice. </FONT><SUP>38</SUP>Pilate
+    	saith unto him, What is truth? And when he had said this, he went
+    	out again unto the Jews, and saith unto them, I find in him no fault
+    	at all. <SUP>39</SUP>But ye have a custom, that I should release
+    	unto you one at the passover, will ye therefore that I release unto
+    	you the King of the Jews? <SUP>40</SUP>Then cried they all again,
+    	saying, Not this man, but Barabbas. Now Barabbas was a robber. </FONT>
+    	</P>
+  </div>
+
+  </div>
+
+<div class="w3-container w3-black w3-center w3-padding-64 neon">
+    <h1 style="font-size: 50px">Rose Aluli Quote Goes Here.</h1>
+</div>
+<!-- Footer -->
+
+<script>
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+  </body>
+</html>

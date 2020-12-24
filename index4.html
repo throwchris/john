@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+
+    <script>
+      function fetch() {
+        // GET SEARCH TERM
+        var data = new FormData();
+        data.append('search', document.getElementById("search").value);
+        data.append('ajax', 1);
+        // AJAX SEARCH REQUEST
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "search.php", true);
+        xhr.onload = function () {
+          if (this.status==200) {
+            var results = JSON.parse(this.response),
+                wrapper = document.getElementById("results");
+            wrapper.innerHTML = "";
+            if (results.length > 0) {
+              for(var res of results) {
+                var popup = document.createElement("div");
+                popup.innerHTML = res['name'] + " - " + res['definition'];
+                popup.classList.add("popup");
+                popup.onclick = function(){this.remove();};
+                document.body.appendChild(popup);
+              }
+            } else {
+              popup.innerHTML = "No results found";
+            }
+          } else {
+            alert("ERROR LOADING FILE!");
+          }
+        };
+        xhr.send(data);
+        return false;
+      }
+    </script>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/d1a6249b79.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee, {font-size:200px}
+</style>
+  </head>
+  <body>
+  <div class="w3-top">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand neon" href="#">Jesus Christ Forever</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">PerfectChurch.com</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            John
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="index.html">Chapters 1 & 2</a> <!-- index.html -->
+            <a class="dropdown-item" href="index2.html">Chapters 3 & 4</a> <!-- index2.html -->
+            <a class="dropdown-item" href="index3.html">Chapters 5 & 6</a> <!-- index3.html -->
+            <a class="dropdown-item" href="index4.html">Chapters 7 & 8</a> <!-- index4.html -->
+            <a class="dropdown-item" href="index5.html">Chapters 9 & 10</a> <!-- index5.html -->
+            <a class="dropdown-item" href="index6.html">Chapters 11 & 12</a> <!-- index6.html -->
+            <a class="dropdown-item" href="index7.html">Chapters 13 & 14</a> <!-- index7.html -->
+            <a class="dropdown-item" href="index8.html">Chapters 15 & 16</a> <!-- index8.html -->
+            <a class="dropdown-item" href="index9.html">Chapters 17 & 18</a> <!-- index9.html -->
+            <a class="dropdown-item" href="index10.html">Chapters 19 & 20</a> <!-- index10.html -->
+            <a class="dropdown-item" href="index11.html">Chapter 21</a>       <!-- index11.html -->
+        </li>
+        </ul>
+      <form onsubmit="return fetch();">
+
+        <input type="text" id="search" required/>
+        <input type="submit" class="button" value="Search"/>
+      </form>
+      <div id="results"></div>
+    </div>
+    </nav>
+      <!-- Navbar on small screens -->
+      <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+      </div>
+    </div>
+    <header class="w3-container w3-black w3-center" style="padding:128px 16px">
+
+          <h1 style="font-size: 60px" class="animate__animated animate__bounceInDown neon">The Gospel According To John.</h1>
+          <p style="font-size: 30px" class="animate__animated animate__bounceInUp neon">"This is the disciple which testifieth of these things, and wrote these things: and we know that his testimony is true."</p>
+
+    <a href="index3.html"><button type="submit" class="button" style="margin:20px">back</button></a>
+    <a href="index5.html"><button type="submit" class="button" style="margin:20px">Next</button></a>
+    </header>
+
+    <div id="content">
+        <div id="left">
+
+          <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+          <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 7</FONT></P>
+          <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+          </P>
+        <!-- Paste 1st chapter under here -->
+
+        <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>A</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>fter
+	these things Jesus walked</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+	in Galilee: for he would not walk in Jewry, because the Jews sought
+	to kill him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+	the Jews' feast of tabernacles was at hand. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">His
+	brethren therefore said unto him, Depart hence, and go into Judaea,
+	that thy disciples also may see the works that thou doest. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">For
+	there is no man that doeth any thing in secret, and he himself
+	seeketh to be known openly. If thou do these things, shew thyself to
+	the world. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">For
+	neither did his brethren believe in him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+	Jesus said unto them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">My
+	time is not yet come: but your time is alway ready. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">The
+	world cannot hate you; but me it hateth, because I testify of it,
+	that the works thereof are evil. </FONT></FONT><FONT COLOR="#ff0000"><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP></FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Go
+	ye up unto this feast: I go not up yet unto this feast; for my time
+	is not yet full come.</FONT></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">When
+	he had said these words unto them, he abode still in Galilee. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+	when his brethren were gone up, then went he also up unto the feast,
+	not openly, but as it were in secret. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+	the Jews sought him at the feast, and said, Where is he? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">12</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+	there was much murmuring among the people concerning him: for some
+	said, He is a good man: others said, Nay; but he deceiveth the
+	people. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">13</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Howbeit
+	no man spake openly of him for fear of the Jews. </FONT>
+	</P>
+	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>14</SUP>Now about the
+	midst of the feast Jesus went up into the temple, and taught. <SUP>15</SUP>And
+	the Jews marvelled, saying, How knoweth this man letters, having
+	never learned? <SUP>16</SUP>Jesus answered them, and said, <FONT COLOR="#ff0000">My
+	doctrine is not mine, but his that sent me. </FONT><FONT COLOR="#ff0000"><SUP>17</SUP></FONT><FONT COLOR="#ff0000">If
+	any man will do his will, he shall know of the doctrine, whether it
+	be of God, or whether I speak of myself. </FONT><FONT COLOR="#ff0000"><SUP>18</SUP></FONT><FONT COLOR="#ff0000">He
+	that speaketh of himself seeketh his own glory: but he that seeketh
+	his glory that sent him, the same is true, and no unrighteousness is
+	in him. </FONT><FONT COLOR="#ff0000"><SUP>19</SUP></FONT><FONT COLOR="#ff0000">Did
+	not Moses give you the law, and yet none of you keepeth the law? Why
+	go ye about to kill me? </FONT><SUP>20</SUP>The people answered and
+	said, Thou hast a devil: who goeth about to kill thee? <SUP>21</SUP>Jesus
+	answered and said unto them, <FONT COLOR="#ff0000">I have done one
+	work, and ye all marvel. </FONT><FONT COLOR="#ff0000"><SUP>22</SUP></FONT><FONT COLOR="#ff0000">Moses
+	therefore gave unto you circumcision; (not because it is of Moses,
+	but of the fathers;) and ye on the sabbath day circumcise a man.
+	</FONT><FONT COLOR="#ff0000"><SUP>23</SUP></FONT><FONT COLOR="#ff0000">If
+	a man on the sabbath day receive circumcision, that the law of Moses
+	should not be broken; are ye angry at me, because I have made a man
+	every whit whole on the sabbath day? </FONT><FONT COLOR="#ff0000"><SUP>24</SUP></FONT><FONT COLOR="#ff0000">Judge
+	not according to the appearance, but judge righteous judgment.</FONT>
+	<SUP>25</SUP>Then said some of them of Jerusalem, Is not this he,
+	whom they seek to kill? <SUP>26</SUP>But, lo, he speaketh boldly,
+	and they say nothing unto him. Do the rulers know indeed that this
+	is the very Christ? <SUP>27</SUP>Howbeit we know this man whence he
+	is: but when Christ cometh, no man knoweth whence he is. <SUP>28</SUP>Then
+	cried Jesus in the temple as he taught, saying, <FONT COLOR="#ff0000">Ye
+	both know me, and ye know whence I am: and I am not come of myself,
+	but he that sent me is true, whom ye know not. </FONT><FONT COLOR="#ff0000"><SUP>29</SUP></FONT><FONT COLOR="#ff0000">But
+	I know him: for I am from him, and he hath sent me. </FONT><SUP>30</SUP>Then
+	they sought to take him: but no man laid hands on him, because his
+	hour was not yet come. <SUP>31</SUP>And many of the people believed
+	on him, and said, When Christ cometh, will he do more miracles than
+	these which this man hath done? </FONT>
+	</P>
+	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>32</SUP>The Pharisees
+	heard that the people murmured such things concerning him; and the
+	Pharisees and the chief priests sent officers to take him. <SUP>33</SUP>Then
+	said Jesus unto them, <FONT COLOR="#ff0000">Yet a little while am I
+	with you, and then I go unto him that sent me. </FONT><FONT COLOR="#ff0000"><SUP>34</SUP></FONT><FONT COLOR="#ff0000">Ye
+	shall seek me, and shall not find me: and where I am, thither ye
+	cannot come.</FONT> <SUP>35</SUP>Then said the Jews among
+	themselves, Whither will he go, that we shall not find him? will he
+	go unto the dispersed among the Gentiles, and teach the Gentiles?
+	<SUP>36</SUP>What manner of saying is this that he said, <FONT COLOR="#ff0000">Ye
+	shall seek me, and shall not find me: and where I am, thither ye
+	cannot come? </FONT><SUP>37</SUP>In the last day, that great day of
+	the feast, Jesus stood and cried, saying, <FONT COLOR="#ff0000">If
+	any man thirst, let him come unto me, and drink. </FONT><FONT COLOR="#ff0000"><SUP>38</SUP></FONT><FONT COLOR="#ff0000">He
+	that believeth on me, as the scripture hath said, out of his belly
+	shall flow rivers of living water.</FONT> <SUP>39</SUP>(But this
+	spake he of the Spirit, which they that believe on him should
+	receive: for the Holy Ghost was not yet given; because that Jesus
+	was not yet glorified.) </FONT>
+	</P>
+	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">40</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Many
+	of the people therefore, when they heard this saying, said, Of a
+	truth this is the Prophet. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">41</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Others
+	said, This is the Christ. But some said, Shall Christ come out of
+	Galilee? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">42</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Hath
+	not the scripture said, That Christ cometh of the seed of David, and
+	out of the town of Bethlehem, where David was? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">43</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">So
+	there was a division among the people because of him. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">44</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+	some of them would have taken him; but no man laid hands on him. </FONT>
+	</P>
+	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+	<SUP><FONT SIZE=4 STYLE="font-size: 16pt">45</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+	came the officers to the chief priests and Pharisees; and they said
+	unto them, Why have ye not brought him? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">46</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">The
+	officers answered, Never man spake like this man. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">47</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Then
+	answered them the Pharisees, Are ye also deceived? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">48</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Have
+	any of the rulers or of the Pharisees believed on him? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">49</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">But
+	this people who knoweth not the law are cursed. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">50</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Nicodemus
+	saith unto them, (he that came to Jesus by night, being one of
+	them,) </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">51</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Doth
+	our law judge any man, before it hear him, and know what he doeth?
+	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">52</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">They
+	answered and said unto him, Art thou also of Galilee? Search, and
+	look: for out of Galilee ariseth no prophet. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">53</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+	every man went unto his own house. </FONT>
+	</P>
+  </div>
+  <div id="right">
+
+    <P CLASS="western" ALIGN=CENTER STYLE="text-indent: 0.2in; margin-bottom: 0in"><i class="fas fa-poo-storm w3-padding-16 w3-text-red w3-animate-fading" style="font-size: 100px"></i>
+    <FONT COLOR="#ff0000"><FONT SIZE=7 STYLE="font-size: 72pt"></FONT></FONT><FONT SIZE=7 STYLE="font-size: 64pt ">Chapter 8</FONT></P>
+    <P CLASS="western" STYLE="margin-bottom: 0in"><BR>
+    </P>
+    <!-- Paste 2nd chapter under here -->
+    <P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=5 STYLE="font-size: 20pt"></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT></SUP><FONT COLOR="#ff0000"><FONT SIZE=6 STYLE="font-size: 22pt"><I><B>J</B></I></FONT></FONT><FONT SIZE=5 STYLE="font-size: 20pt"><B>esus
+    	went unto the mount of Olives.</B></FONT><FONT SIZE=4 STYLE="font-size: 16pt">
+    	</FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">2</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	early in the morning he came again into the temple, and all the
+    	people came unto him; and he sat down, and taught them. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">3</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	the scribes and Pharisees brought unto him a woman taken in
+    	adultery; and when they had set her in the midst, </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">4</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">they
+    	say unto him, Master, this woman was taken in adultery, in the very
+    	act. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">5</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">Now
+    	Moses in the law commanded us, that such should be stoned: but what
+    	sayest thou? </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">6</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">This
+    	they said, tempting him, that they might have to accuse him. But
+    	Jesus stooped down, and with his finger wrote on the ground, as
+    	though he heard them not. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">7</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">So
+    	when they continued asking him, he lifted up himself, and said unto
+    	them, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">He
+    	that is without sin among you, let him first cast a stone at her.
+    	</FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">8</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	again he stooped down, and wrote on the ground. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">9</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">And
+    	they which heard it, being convicted by their own conscience, went
+    	out one by one, beginning at the eldest, even unto the last: and
+    	Jesus was left alone, and the woman standing in the midst. </FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">10</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">When
+    	Jesus had lifted up himself, and saw none but the woman, he said
+    	unto her, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Woman,
+    	where are those thine accusers? hath no man condemned thee? </FONT></FONT><SUP><FONT SIZE=4 STYLE="font-size: 16pt">11</FONT></SUP><FONT SIZE=4 STYLE="font-size: 16pt">She
+    	said, No man, Lord. And Jesus said unto her, </FONT><FONT COLOR="#ff0000"><FONT SIZE=4 STYLE="font-size: 16pt">Neither
+    	do I condemn thee: go, and sin no more. </FONT></FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>12</SUP>Then spake Jesus
+    	again unto them, saying, <FONT COLOR="#ff0000">I am the light of the
+    	world: he that followeth me shall not walk in darkness, but shall
+    	have the light of life. </FONT><SUP>13</SUP>The Pharisees therefore
+    	said unto him, Thou bearest record of thyself; thy record is not
+    	true. <SUP>14</SUP>Jesus answered and said unto them, <FONT COLOR="#ff0000">Though
+    	I bear record of myself, yet my record is true: for I know whence I
+    	came, and whither I go; but ye cannot tell whence I come, and
+    	whither I go. </FONT><FONT COLOR="#ff0000"><SUP>15</SUP></FONT><FONT COLOR="#ff0000">Ye
+    	judge after the flesh; I judge no man. </FONT><FONT COLOR="#ff0000"><SUP>16</SUP></FONT><FONT COLOR="#ff0000">And
+    	yet if I judge, my judgment is true: for I am not alone, but I and
+    	the Father that sent me. </FONT><FONT COLOR="#ff0000"><SUP>17</SUP></FONT><FONT COLOR="#ff0000">It
+    	is also written in your law, that the testimony of two men is true.
+    	</FONT><FONT COLOR="#ff0000"><SUP>18</SUP></FONT><FONT COLOR="#ff0000">I
+    	am one that bear witness of myself, and the Father that sent me
+    	beareth witness of me.</FONT> <SUP>19</SUP>Then said they unto him,
+    	Where is thy Father? Jesus answered, <FONT COLOR="#ff0000">Ye
+    	neither know me, nor my Father: if ye had known me, ye should have
+    	known my Father also. </FONT><SUP>20</SUP>These words spake Jesus in
+    	the treasury, as he taught in the temple: and no man laid hands on
+    	him; for his hour was not yet come. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>21</SUP>Then said Jesus
+    	again unto them, <FONT COLOR="#ff0000">I go my way, and ye shall
+    	seek me, and shall die in your sins: whither I go, ye cannot come.
+    	</FONT><SUP>22</SUP>Then said the Jews, Will he kill himself?
+    	because he saith, <FONT COLOR="#ff0000">Whither I go, ye cannot
+    	come. </FONT><SUP>23</SUP>And he said unto them, <FONT COLOR="#ff0000">Ye
+    	are from beneath; I am from above: ye are of this world; I am not of
+    	this world. </FONT><FONT COLOR="#ff0000"><SUP>24</SUP></FONT><FONT COLOR="#ff0000">I
+    	said therefore unto you, that ye shall die in your sins: for if ye
+    	believe not that I am he, ye shall die in your sins</FONT>. <SUP>25</SUP>Then
+    	said they unto him, Who art thou? And Jesus saith unto them, <FONT COLOR="#ff0000">Even
+    	the same that I said unto you from the beginning. </FONT><FONT COLOR="#ff0000"><SUP>26</SUP></FONT><FONT COLOR="#ff0000">I
+    	have many things to say and to judge of you: but he that sent me is
+    	true; and I speak to the world those things which I have heard of
+    	him</FONT>. <SUP>27</SUP>They understood not that he spake to them
+    	of the Father. <SUP>28</SUP>Then said Jesus unto them, <FONT COLOR="#ff0000">When
+    	ye have lifted up the Son of man, then shall ye know that I am he,
+    	and that I do nothing of myself; but as my Father hath taught me, I
+    	speak these things. </FONT><FONT COLOR="#ff0000"><SUP>29</SUP></FONT><FONT COLOR="#ff0000">And
+    	he that sent me is with me: the Father hath not left me alone; for I
+    	do always those things that please him. </FONT><SUP>30</SUP>As he
+    	spake these words, many believed on him. </FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>31</SUP>Then said Jesus to
+    	those Jews which believed on him, <FONT COLOR="#ff0000">If ye
+    	continue in my word, then are ye my disciples indeed; </FONT><FONT COLOR="#ff0000"><SUP>32</SUP></FONT><FONT COLOR="#ff0000">and
+    	ye shall know the truth, and the truth shall make you free. </FONT><SUP>33</SUP>They
+    	answered him, We be Abraham's seed, and were never in bondage to any
+    	man: how sayest thou, <FONT COLOR="#ff0000">Ye shall be made free?
+    	</FONT><SUP>34</SUP>Jesus answered them, <FONT COLOR="#ff0000">Verily,
+    	verily, I say unto you, Whosoever committeth sin is the servant of
+    	sin. </FONT><FONT COLOR="#ff0000"><SUP>35</SUP></FONT><FONT COLOR="#ff0000">And
+    	the servant abideth not in the house for ever: but the Son abideth
+    	ever. </FONT><FONT COLOR="#ff0000"><SUP>36</SUP></FONT><FONT COLOR="#ff0000">If
+    	the Son therefore shall make you free, ye shall be free indeed. </FONT><FONT COLOR="#ff0000"><SUP>37</SUP></FONT><FONT COLOR="#ff0000">I
+    	know that ye are Abraham's seed; but ye seek to kill me, because my
+    	word hath no place in you. </FONT><FONT COLOR="#ff0000"><SUP>38</SUP></FONT><FONT COLOR="#ff0000">I
+    	speak that which I have seen with my Father: and ye do that which ye
+    	have seen with your father.</FONT> <SUP>39</SUP>They answered and
+    	said unto him, Abraham is our father. Jesus saith unto them, <FONT COLOR="#ff0000">If
+    	ye were Abraham's children, ye would do the works of Abraham. </FONT><FONT COLOR="#ff0000"><SUP>40</SUP></FONT><FONT COLOR="#ff0000">But
+    	now ye seek to kill me, a man that hath told you the truth, which I
+    	have heard of God: this did not Abraham. </FONT><FONT COLOR="#ff0000"><SUP>41</SUP></FONT><FONT COLOR="#ff0000">Ye
+    	do the deeds of your father.</FONT> Then said they to him, We be not
+    	born of fornication; we have one Father, even God. <SUP>42</SUP>Jesus
+    	said unto them, <FONT COLOR="#ff0000">If God were your Father, ye
+    	would love me: for I proceeded forth and came from God; neither came
+    	I of myself, but he sent me. </FONT><FONT COLOR="#ff0000"><SUP>43</SUP></FONT><FONT COLOR="#ff0000">Why
+    	do ye not understand my speech? even because ye cannot hear my word.
+    	</FONT><FONT COLOR="#ff0000"><SUP>44</SUP></FONT><FONT COLOR="#ff0000">Ye
+    	are of your father the devil, and the lusts of your father ye will
+    	do. He was a murderer from the beginning, and abode not in the
+    	truth, because there is no truth in him. When he speaketh a lie, he
+    	speaketh of his own: for he is a liar, and the father of it. </FONT><FONT COLOR="#ff0000"><SUP>45</SUP></FONT><FONT COLOR="#ff0000">And
+    	because I tell you the truth, ye believe me not. </FONT><FONT COLOR="#ff0000"><SUP>46</SUP></FONT><FONT COLOR="#ff0000">Which
+    	of you convinceth me of sin? And if I say the truth, why do ye not
+    	believe me? </FONT><FONT COLOR="#ff0000"><SUP>47</SUP></FONT><FONT COLOR="#ff0000">He
+    	that is of God heareth God's words: ye therefore hear them not,
+    	because ye are not of God. </FONT></FONT>
+    	</P>
+    	<P CLASS="western" ALIGN=JUSTIFY STYLE="text-indent: 0.2in; margin-bottom: 0in">
+    	<FONT SIZE=4 STYLE="font-size: 16pt"><SUP>48</SUP>Then answered the
+    	Jews, and said unto him, Say we not well that thou art a Samaritan,
+    	and hast a devil? <SUP>49</SUP>Jesus answered, <FONT COLOR="#ff0000">I
+    	have not a devil; but I honour my Father, and ye do dishonour me.
+    	</FONT><FONT COLOR="#ff0000"><SUP>50</SUP></FONT><FONT COLOR="#ff0000">And
+    	I seek not mine own glory: there is one that seeketh and judgeth.
+    	</FONT><FONT COLOR="#ff0000"><SUP>51</SUP></FONT><FONT COLOR="#ff0000">Verily,
+    	verily, I say unto you, If a man keep my saying, he shall never see
+    	death.</FONT> <SUP>52</SUP>Then said the Jews unto him, Now we know
+    	that thou hast a devil. Abraham is dead, and the prophets; and thou
+    	sayest, <FONT COLOR="#ff0000">If a man keep my saying, he shall
+    	never taste of death. </FONT><SUP>53</SUP>Art thou greater than our
+    	father Abraham, which is dead? and the prophets are dead: whom
+    	makest thou thyself? <SUP>54</SUP>Jesus answered, <FONT COLOR="#ff0000">If
+    	I honour myself, my honour is nothing: it is my Father that
+    	honoureth me; of whom ye say, that he is your God: </FONT><FONT COLOR="#ff0000"><SUP>55</SUP></FONT><FONT COLOR="#ff0000">yet
+    	ye have not known him; but I know him: and if I should say, I know
+    	him not, I shall be a liar like unto you: but I know him, and keep
+    	his saying. </FONT><FONT COLOR="#ff0000"><SUP>56</SUP></FONT><FONT COLOR="#ff0000">Your
+    	father Abraham rejoiced to see my day: and he saw it, and was glad.</FONT>
+    	<SUP>57</SUP>Then said the Jews unto him, Thou art not yet fifty
+    	years old, and hast thou seen Abraham? <SUP>58</SUP>Jesus said unto
+    	them, <FONT COLOR="#ff0000">Verily, verily, I say unto you, Before
+    	Abraham was, I am. </FONT><SUP>59</SUP>Then took they up stones to
+    	cast at him: but Jesus hid himself, and went out of the temple,
+    	going through the midst of them, and so passed by.</FONT></P>
+  </div>
+
+  </div>
+
+<div class="w3-container w3-black w3-center w3-padding-64 neon">
+    <h1 style="font-size: 50px">Rose Aluli Quote Goes Here.</h1>
+</div>
+<!-- Footer -->
+
+<script>
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else {
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
+  </body>
+</html>
